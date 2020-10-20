@@ -1,0 +1,13 @@
+Backend
+ - sound analysis and integrate translation technology to display subtitles when video doesn't have sound
+
+Frontend
+- school/university environment requirements based on needs
+
+Backend/Frontend
+- recomandations based on discussion topic
+- "smart record", minimize the talking pauses, off-topic questions, private discussions, other off-topic things.
+
+Almășanu Teodor Ioan - Backend
+Maria-Roxana Luca - Backend, Frontend
+Eduard Gherghelucă - Backend, Frontend
