@@ -11,7 +11,7 @@ class Subtitle {
 	/**
 	 * @AttributeType String
 	 */
-	private $_text;
+	private $subtitles;
 	/**
 	 * @AttributeType ReceivedVideoStream
 	 * /**
@@ -19,6 +19,33 @@ class Subtitle {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_ReceivedVideoStream_;
+
+	public function enableSubtitles(){
+		if ($this->subtitles == "disabled"){
+			$this->subtitles = "enabled";
+	}
+
+	public function disableSubtitles(){
+		if ($this->subtitles == "enabled"){
+			$this->subtitles = "disabled";
+	}
+
+	public function getSubtitlesStatus(){
+		return $this->subtitles;
+	}
+
+	public function showSubtitles(){
+		if (getSubtitlesStatus() == "enabled"){
+			//Run script/function that displays subtitles on video
+		}
+	}
+
+	public $ReceivedVideoStream;
+
+	public function addSubtitlesToVideo($ReceivedVideoStream){
+		// Add/process subtitles
+	}
+
+
 }
 ?>

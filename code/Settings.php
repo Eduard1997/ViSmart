@@ -11,15 +11,29 @@ class Settings {
 	/**
 	 * @AttributeType bool
 	 */
-	private $_allowScreenSharing;
+	private $allowScreenSharing;
 	/**
 	 * @AttributeType bool
 	 */
+	
+	public function enableScreenSharing() {
+		// Here the screen sharing sshould be enabled with a specific function
+		$this->allowScreenSharing = True;
+		echo 'The screen sharing has been enabled';
+	}
+
+	public function disableScreenSharing() {
+	// Here the screen sharing should be disabled with a specific function
+		$this->allowScreenSharing = True;
+		echo 'The screen sharing has been enabled';
+	}
+
+
 	private $_allowVideoRecording;
 	/**
 	 * @AttributeType bool
 	 */
-	private $_allowAlerts;
+	private $alerts = "enabled";
 	/**
 	 * @AttributeType VideoStream
 	 * /**
@@ -27,6 +41,16 @@ class Settings {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
+	public function enableAlerts(){
+		if ($this->alerts == "disabled"){
+			$this->alerts = "enabled";
+		}
+
+	public function disableAlerts(){
+		if ($this->alerts == "enabled"){
+			$this->alerts = "disabled";
+		}
+
 	public $_VideoStream_;
 }
 ?>

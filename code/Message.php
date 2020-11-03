@@ -25,7 +25,7 @@ class Message {
 	 * /**
 	 *  * @AssociationType Chat
 	 *  * /
-	 */
+	 */ 
 	public $_Chat_;
 	/**
 	 * @AttributeType Attachment
