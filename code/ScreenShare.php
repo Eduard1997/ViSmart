@@ -17,7 +17,7 @@ class ScreenShare {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_VideoStream_;
+	public $_VideoStream_;
 	/**
 	 * @AttributeType Account
 	 * /**
@@ -25,6 +25,6 @@ class ScreenShare {
 	 *  * @AssociationKind Composition
 	 *  * /
 	 */
-	public $_unnamed_Account_;
+	public $_Account_;
 }
 ?>

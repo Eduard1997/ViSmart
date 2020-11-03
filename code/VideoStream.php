@@ -19,7 +19,7 @@ class VideoStream {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_VideoRest_;
+	public $_VideoRest_;
 	/**
 	 * @AttributeType Video
 	 * /**
@@ -28,7 +28,7 @@ class VideoStream {
 	 *  * @AssociationKind Aggregation
 	 *  * /
 	 */
-	public $_unnamed_Video_ = array();
+	public $_Video_ = array();
 	/**
 	 * @AttributeType Settings
 	 * /**
@@ -36,6 +36,6 @@ class VideoStream {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_Settings_;
+	public $_Settings_;
 }
 ?>

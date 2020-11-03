@@ -22,6 +22,6 @@ class Alert {
 	 *  * @AssociationType ReceivedVideoStream
 	 *  * /
 	 */
-	public $_unnamed_ReceivedVideoStream_;
+	public $_ReceivedVideoStream_;
 }
 ?>

@@ -17,6 +17,6 @@ class LiveChat extends Chat {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_VideoRest_;
+	public $_VideoRest_;
 }
 ?>

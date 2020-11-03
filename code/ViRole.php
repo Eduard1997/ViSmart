@@ -15,6 +15,6 @@ class ViRole {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_User_;
+	public $_User_;
 }
 ?>

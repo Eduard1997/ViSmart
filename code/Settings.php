@@ -27,6 +27,6 @@ class Settings {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_VideoStream_;
+	public $_VideoStream_;
 }
 ?>

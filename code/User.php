@@ -26,7 +26,7 @@ class User extends Account {
 	 *  * @AssociationMultiplicity 0..1
 	 *  * /
 	 */
-	public $_unnamed_ViRole_;
+	public $_ViRole_;
 	/**
 	 * @AttributeType ClassRole
 	 * /**
@@ -34,7 +34,7 @@ class User extends Account {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_ClassRole_;
+	public $_ClassRole_;
 	/**
 	 * @AttributeType VideoRest
 	 * /**
@@ -42,20 +42,20 @@ class User extends Account {
 	 *  * @AssociationMultiplicity 0..1
 	 *  * /
 	 */
-	public $_unnamed_VideoRest_;
+	public $_VideoRest_;
 	/**
 	 * @AttributeType ClassroomInventory
 	 * /**
 	 *  * @AssociationType ClassroomInventory
 	 *  * /
 	 */
-	public $_unnamed_ClassroomInventory_;
+	public $_ClassroomInventory_;
 	/**
 	 * @AttributeType ClassroomRest
 	 * /**
 	 *  * @AssociationType ClassroomRest
 	 *  * /
 	 */
-	public $_unnamed_ClassroomRest_;
+	public $_ClassroomRest_;
 }
 ?>

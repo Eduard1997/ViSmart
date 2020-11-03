@@ -16,13 +16,13 @@ class ClassroomInventory {
 	 *  * @AssociationType User
 	 *  * /
 	 */
-	public $_unnamed_User_;
+	public $_User_;
 	/**
 	 * @AttributeType Classroom
 	 * /**
 	 *  * @AssociationType Classroom
 	 *  * /
 	 */
-	public $_unnamed_Classroom_;
+	public $_Classroom_;
 }
 ?>

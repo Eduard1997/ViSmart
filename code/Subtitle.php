@@ -19,6 +19,6 @@ class Subtitle {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_ReceivedVideoStream_;
+	public $_ReceivedVideoStream_;
 }
 ?>

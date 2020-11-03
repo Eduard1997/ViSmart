@@ -17,7 +17,7 @@ class Classroom {
 	 *  * @AssociationKind Aggregation
 	 *  * /
 	 */
-	public $_unnamed_Chanels_;
+	public $_Chanels_;
 	/**
 	 * @AttributeType ClassroomInventory
 	 * /**
@@ -25,6 +25,6 @@ class Classroom {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_ClassroomInventory_;
+	public $_ClassroomInventory_;
 }
 ?>

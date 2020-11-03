@@ -16,6 +16,6 @@ class ReceivedVideoStream extends VideoStream {
 	 *  * @AssociationType Alert
 	 *  * /
 	 */
-	public $_unnamed_Alert_;
+	public $_Alert_;
 }
 ?>

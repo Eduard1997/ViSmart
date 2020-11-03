@@ -14,7 +14,7 @@ class ClassRole {
 	 *  * @AssociationType ClassRole
 	 *  * /
 	 */
-	public $_unnamed_ClassRole_;
+	public $_ClassRole_;
 	/**
 	 * @AttributeType User
 	 * /**
@@ -22,6 +22,6 @@ class ClassRole {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_User_;
+	public $_User_;
 }
 ?>

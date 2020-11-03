@@ -19,13 +19,13 @@ class Video {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_Account_;
+	public $_Account_;
 	/**
 	 * @AttributeType VideoStream
 	 * /**
 	 *  * @AssociationType VideoStream
 	 *  * /
 	 */
-	public $_unnamed_VideoStream_;
+	public $_VideoStream_;
 }
 ?>

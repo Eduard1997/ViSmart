@@ -14,6 +14,6 @@ class ClassroomRest {
 	 *  * @AssociationType User
 	 *  * /
 	 */
-	public $_unnamed_User_;
+	public $_User_;
 }
 ?>

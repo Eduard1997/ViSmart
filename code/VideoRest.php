@@ -27,7 +27,7 @@ class VideoRest {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_LiveChat_;
+	public $_LiveChat_;
 	/**
 	 * @AttributeType User
 	 * /**
@@ -35,7 +35,7 @@ class VideoRest {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_User_;
+	public $_User_;
 	/**
 	 * @AttributeType VideoStream
 	 * /**
@@ -43,6 +43,6 @@ class VideoRest {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_VideoStream_;
+	public $_VideoStream_;
 }
 ?>

@@ -15,6 +15,6 @@ class Chat {
 	 *  * @AssociationKind Aggregation
 	 *  * /
 	 */
-	public $_unnamed_Message_;
+	public $_Message_;
 }
 ?>

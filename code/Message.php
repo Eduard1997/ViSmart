@@ -19,14 +19,14 @@ class Message {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_Account_;
+	public $_Account_;
 	/**
 	 * @AttributeType Chat
 	 * /**
 	 *  * @AssociationType Chat
 	 *  * /
 	 */
-	public $_unnamed_Chat_;
+	public $_Chat_;
 	/**
 	 * @AttributeType Attachment
 	 * /**
@@ -34,6 +34,6 @@ class Message {
 	 *  * @AssociationKind Aggregation
 	 *  * /
 	 */
-	public $_unnamed_Attachment_;
+	public $_Attachment_;
 }
 ?>

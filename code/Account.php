@@ -23,14 +23,14 @@ class Account {
 	/**
 	 * @AttributeType String
 	 */
-	private $_picture_src;
+	private $_picture;
 	/**
 	 * @AttributeType ScreenShare
 	 * /**
 	 *  * @AssociationType ScreenShare
 	 *  * /
 	 */
-	public $_unnamed_ScreenShare_;
+	public $_ScreenShare_;
 	/**
 	 * @AttributeType Video
 	 * /**
@@ -38,13 +38,13 @@ class Account {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_unnamed_Video_;
+	public $_Video_;
 	/**
 	 * @AttributeType Message
 	 * /**
 	 *  * @AssociationType Message
 	 *  * /
 	 */
-	public $_unnamed_Message_;
+	public $_Message_;
 }
 ?>

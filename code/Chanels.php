@@ -16,6 +16,6 @@ class Chanels extends Chat {
 	 *  * @AssociationType Classroom
 	 *  * /
 	 */
-	public $_unnamed_Classroom_;
+	public $_Classroom_;
 }
 ?>
