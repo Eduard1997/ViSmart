@@ -25,7 +25,7 @@ class Settings {
 	public function disableScreenSharing() {
 	// Here the screen sharing should be disabled with a specific function
 		$this->allowScreenSharing = True;
-		echo 'The screen sharing has been enabled';
+		echo 'The screen sharing has been disabled';
 	}
 
 
@@ -45,11 +45,13 @@ class Settings {
 		if ($this->alerts == "disabled"){
 			$this->alerts = "enabled";
 		}
+	}
 
 	public function disableAlerts(){
 		if ($this->alerts == "enabled"){
 			$this->alerts = "disabled";
 		}
+	}
 
 	public $_VideoStream_;
 }
