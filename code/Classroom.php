@@ -18,13 +18,15 @@ class Classroom {
 	 *  * /
 	 */
 	public $_Chanels_;
-	/**
-	 * @AttributeType ClassroomInventory
-	 * /**
-	 *  * @AssociationType ClassroomInventory
-	 *  * @AssociationMultiplicity 1
-	 *  * /
-	 */
-	public $_ClassroomInventory_;
+
+	public $_name_;
+
+	public function setName($param){
+		self::$_name_ = $param;
+	}
+
+	public function getName(){
+		return $this->$_name_;
+	}
 }
 ?>

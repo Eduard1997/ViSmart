@@ -18,7 +18,7 @@ use Account;
  * @author mariaroxanaluca
  */
 class User extends Account {
-	private $_password;
+	private $_session_id;
 	/**
 	 * @AttributeType ViRole
 	 * /**
@@ -56,6 +56,32 @@ class User extends Account {
 	 *  * @AssociationType ClassroomRest
 	 *  * /
 	 */
-	public $_ClassroomRest_;
+	public $_ClassroomRest_ = ClassroomRest.getInstance($this);
+
+	public function get_ClassRoomList()
+	{
+		if ($_ClassroomRest_-> hasUpdates())
+			$_ClassroomInventory_ = $_ClassroomRest_-> getClassRoomList();
+		return  $_ClassroomInventory_;
+	}
+
+	public function join_Session($url_link, $meeting_id)
+	{
+		if (isset($_ClassRole_)) {
+			$_VideoRooms = VideoRooms.getInstance();
+			$_VideoRest_ = $_VideoRooms->find($url_link, $meeting_id);
+			$_ViRole_ == $_VideoRest_->get_role(get_class($_ClassRole_));
+	 }
+	 else echo "Denied access";
+ }
+
+ public function sendMessage($given_message, $consignee){
+	 // Then we send the message to the consignee
+ }
+
+ public function receiveMessage(){
+	 // Then we send the message to the consignee
+ }
+
 }
 ?>

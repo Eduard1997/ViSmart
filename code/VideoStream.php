@@ -28,14 +28,18 @@ class VideoStream {
 	 *  * @AssociationKind Aggregation
 	 *  * /
 	 */
-	public $_Video_ = array();
+
+	public $_Settings_;
+
 	/**
-	 * @AttributeType Settings
+	 * @AttributeType LiveChat
 	 * /**
-	 *  * @AssociationType Settings
+	 *  * @AssociationType LiveChat
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_Settings_;
+	private $_LiveChat_;
+
+	
 }
 ?>

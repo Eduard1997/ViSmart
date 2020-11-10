@@ -21,11 +21,21 @@ class Video {
 	 */
 	public $_Account_;
 	/**
-	 * @AttributeType VideoStream
+	 * @AttributeType VideoRest
 	 * /**
-	 *  * @AssociationType VideoStream
+	 *  * @AssociationType VideoRest
+	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_VideoStream_;
+	public $_VideoRest_;
+
+	function __construct Video($_VideoRest_){
+		$_VideoRest_ = $_VideoRest_;
+		$_VideoRest_.attach($this);
+	}
+
+	public function update(){
+			
+	}
 }
 ?>

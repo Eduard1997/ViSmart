@@ -11,12 +11,12 @@ use Chat;
  */
 class LiveChat extends Chat {
 	/**
-	 * @AttributeType VideoRest
+	 * @AttributeType VideoStream
 	 * /**
-	 *  * @AssociationType VideoRest
+	 *  * @AssociationType VideoStream
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_VideoRest_;
+	public $_VideoStream_;
 }
 ?>

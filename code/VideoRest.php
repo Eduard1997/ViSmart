@@ -2,10 +2,12 @@
 require_once(realpath(dirname(__FILE__)) . '/LiveChat.php');
 require_once(realpath(dirname(__FILE__)) . '/User.php');
 require_once(realpath(dirname(__FILE__)) . '/VideoStream.php');
+require_once(realpath(dirname(__FILE__)) . '/Video.php');
 
 use LiveChat;
-use User;
 use VideoStream;
+use User;
+use Video;
 
 /**
  * @access public
@@ -20,14 +22,7 @@ class VideoRest {
 	 * @AttributeType String
 	 */
 	private $_uRI;
-	/**
-	 * @AttributeType LiveChat
-	 * /**
-	 *  * @AssociationType LiveChat
-	 *  * @AssociationMultiplicity 1
-	 *  * /
-	 */
-	public $_LiveChat_;
+
 	/**
 	 * @AttributeType User
 	 * /**
@@ -35,14 +30,40 @@ class VideoRest {
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_User_;
+	public $_VideoStream_;
+
+	public $_Videos_ = array();
 	/**
-	 * @AttributeType VideoStream
+	 * @AttributeType Settings
 	 * /**
-	 *  * @AssociationType VideoStream
+	 *  * @AssociationType Settings
 	 *  * @AssociationMultiplicity 1
 	 *  * /
 	 */
-	public $_VideoStream_;
+
+	public function getState() {
+		 return $this->$_VideoStream_;
+	}
+
+	public function setState($VideoStream) {
+		 self::$_VideoStream_ = $VideoStream;
+		 notifyAllObservers();
+	}
+
+	public function attach($user){
+		 $observer = Video($user);
+		 $_Videos_.add($observer);
+	}
+
+	public function notifyAllObservers(){
+		 foreach ( $observer as $_Videos_) {
+				$observer.update();
+		 }
+	}
+
+	public function checkCredits($url_link, $meeting_id){
+		return ($_uRI === $url_link && $_meetingId===$meeting_id);
+	}
+
 }
 ?>

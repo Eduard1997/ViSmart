@@ -74,19 +74,5 @@ class Account {
 	 *  * @AssociationType Message
 	 *  * /
 	 */
-	public $message;
-
-	public function sendMessage($given_message, $consignee){
-		self::$message = $given_message;
-		// Then we send the message to the consignee
-	}
-
-	public function receiveMessage(){
-		echo "You've got mail!";
-		return $this->picture;
-		// Then we send the message to the consignee
-	}
-
-
 }
 ?>
