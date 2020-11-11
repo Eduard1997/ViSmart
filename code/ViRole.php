@@ -16,5 +16,9 @@ class ViRole {
 	 *  * /
 	 */
 	public $_User_;
+
+	 public function startScreenShare()
+	 {
+	 }
 }
 ?>

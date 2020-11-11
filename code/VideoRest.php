@@ -41,13 +41,25 @@ class VideoRest {
 	 *  * /
 	 */
 
+	private $_ViCoordinator_;
+
+	public __construct( $ViCoordinator){
+		$_ViCoordinator_ = $ViCoordinator;
+		$meeting_id = random_bytes(20);
+		$url_link = "";
+		self::$_VideoStream_ = VideoStream();
+	}
+
 	public function getState() {
 		 return $this->$_VideoStream_;
 	}
 
-	public function setState($VideoStream) {
-		 self::$_VideoStream_ = $VideoStream;
-		 notifyAllObservers();
+	public function setSettings($user,$settings)
+	{
+		if ($user == $_ViCoordinator_){
+			$_VideoStream_ = VideoStream($settings);
+			notifyAllObservers();
+		}
 	}
 
 	public function attach($user){

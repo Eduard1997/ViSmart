@@ -18,14 +18,6 @@ use Account;
  * @author mariaroxanaluca
  */
 class User extends Account {
-	private $_session_id;
-	/**
-	 * @AttributeType ViRole
-	 * /**
-	 *  * @AssociationType ViRole
-	 *  * @AssociationMultiplicity 0..1
-	 *  * /
-	 */
 	public $_ViRole_;
 	/**
 	 * @AttributeType ClassRole
@@ -58,6 +50,11 @@ class User extends Account {
 	 */
 	public $_ClassroomRest_ = ClassroomRest.getInstance($this);
 
+	public __constructor($class_role)
+	{
+		$_ClassRole_ = $class_role;
+	}
+
 	public function get_ClassRoomList()
 	{
 		if ($_ClassroomRest_-> hasUpdates())
@@ -65,15 +62,10 @@ class User extends Account {
 		return  $_ClassroomInventory_;
 	}
 
-	public function join_Session($url_link, $meeting_id)
-	{
-		if (isset($_ClassRole_)) {
-			$_VideoRooms = VideoRooms.getInstance();
-			$_VideoRest_ = $_VideoRooms->find($url_link, $meeting_id);
-			$_ViRole_ == $_VideoRest_->get_role(get_class($_ClassRole_));
-	 }
-	 else echo "Denied access";
- }
+	public function set_VRole($obj){
+		if (!isset($_ViRole_))
+			  $_ViRole_ = $obj;
+	}
 
  public function sendMessage($given_message, $consignee){
 	 // Then we send the message to the consignee

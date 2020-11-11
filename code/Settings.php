@@ -15,7 +15,7 @@ class Settings {
 	/**
 	 * @AttributeType bool
 	 */
-	
+
 	public function enableScreenSharing() {
 		// Here the screen sharing sshould be enabled with a specific function
 		$this->allowScreenSharing = True;
@@ -53,6 +53,5 @@ class Settings {
 		}
 	}
 
-	public $_VideoStream_;
 }
 ?>

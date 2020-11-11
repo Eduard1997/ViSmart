@@ -40,6 +40,7 @@ class VideoStream {
 	 */
 	private $_LiveChat_;
 
-	
+	private $_ScreenShare_;
+
 }
 ?>
