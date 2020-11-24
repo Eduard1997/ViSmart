@@ -28,5 +28,6 @@ class Classroom {
 	public function getName(){
 		return $this->$_name_;
 	}
+
 }
 ?>

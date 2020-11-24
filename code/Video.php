@@ -29,13 +29,13 @@ class Video {
 	 */
 	public $_VideoRest_;
 
-	function __construct Video($_VideoRest_){
+	function __construct($_VideoRest_){
 		$_VideoRest_ = $_VideoRest_;
 		$_VideoRest_.attach($this);
 	}
 
 	public function update(){
-			
+
 	}
 }
 ?>
