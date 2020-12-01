@@ -66,8 +66,8 @@ export default {
   methods: {
     login() {
       var self = this;
-      axios.post('http://localhost:80/vismart_server/LoginHandler.php', {email: this.email, password: this.password}).then(function(response) {
-        if(response.data.success == true) {
+      axios.post("/api/user", {email: this.email, password: this.password}).then(function(response) {
+        if(response.data.username) {
           self.$router.push({ name: 'profile', params: {firstName: response.data.first_name, lastName: response.data.last_name, loggedIn: true}});
         }
       })
