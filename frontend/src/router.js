@@ -8,6 +8,7 @@ import Login from "./views/Login.vue";
 import Register from "./views/Register.vue";
 import Profile from "./views/Profile.vue";
 import Classes from "./views/Classes";
+import TestStream from "./views/TestStream";
 
 Vue.use(Router);
 
@@ -63,6 +64,13 @@ export default new Router({
       components: {
         header: AppHeader,
         default: Classes,
+      },
+    },
+    {
+      path: "/test-stream",
+      name: "testStream",
+      components: {
+        default: TestStream,
       },
     }
   ],

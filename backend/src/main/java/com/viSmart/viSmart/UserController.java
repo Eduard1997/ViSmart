@@ -32,5 +32,9 @@ public class UserController {
         }
         throw new AccountNotFoundException("nobody");
     }
-
+    @GetMapping(value="/test")
+    @ResponseBody
+    public int test() {
+        return 1;
+    }
 }
