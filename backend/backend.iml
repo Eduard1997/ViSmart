@@ -39,7 +39,6 @@
     <orderEntry type="library" name="Spring-5.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.3" level="project" />
@@ -82,7 +81,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.7.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-aop:2.4.0" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.9.6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:3.4.5" level="project" />
@@ -105,7 +103,6 @@
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-web:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-json:2.4.0" level="project" />
@@ -121,7 +118,14 @@
     <orderEntry type="library" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:9.0.39" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:5.3.1" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.1" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.18" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.websocket:javax.websocket-api:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-websocket:5.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-websocket:2.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-messaging:5.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.3.1" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.1" level="project" />
   </component>
 </module>

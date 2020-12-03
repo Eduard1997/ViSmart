@@ -1,5 +1,8 @@
 package com.viSmart.viSmart;
 
+
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,7 +15,8 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/signal")
+@ServerEndpoint(value = "/signal")
+@Component
 public class WebRtcSignalingEndpoint {
 
     private static final Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());

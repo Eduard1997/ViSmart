@@ -173,9 +173,9 @@
         mounted() {
             let self = this;
                 console.log(window.location.host +
-                    "/video-conf-tutorial/signal")
+                    "/api/signal")
                 self.signalingWebsocket = new WebSocket("ws://" + window.location.host +
-                    "/video-conf-tutorial/signal");
+                    "/api/signal");
                 self.signalingWebsocket.onmessage = function(msg) {
                     console.log("Got message", msg.data);
                     var signal = JSON.parse(msg.data);
