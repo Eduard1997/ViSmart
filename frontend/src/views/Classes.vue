@@ -86,7 +86,8 @@ name: "classes",
   created() {
     var self = this;
     this.$route.params.loggedIn = true;
-    axios.get('http://localhost:80/vismart_server/ClassesHandler.php').then(function(response) {
+    axios.post('/api/get-classes').then(function(response) {
+      console.log(response.data);
       self.classes = response.data;
     })
   }
