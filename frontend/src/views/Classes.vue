@@ -86,7 +86,7 @@ name: "classes",
   created() {
     var self = this;
     this.$route.params.loggedIn = true;
-    axios.post('/api/get-classes').then(function(response) {
+    axios.post('/api/get-groups').then(function(response) {
       console.log(response.data);
       self.classes = response.data;
     })
@@ -94,5 +94,3 @@ name: "classes",
 
 }
 </script>
-
-

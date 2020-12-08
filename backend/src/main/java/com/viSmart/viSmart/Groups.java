@@ -17,4 +17,9 @@ public class Groups {
         return this.id;
     }
 
+    public String getName(){return this.name;}
+
+    public Date getCreated_at(){return this.created_at;}
+
+    public Date getUpdated_at(){return this.updated_at;}
 }
