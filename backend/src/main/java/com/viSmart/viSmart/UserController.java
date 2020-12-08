@@ -32,6 +32,20 @@ public class UserController {
         }
         throw new AccountNotFoundException("nobody");
     }
+
+    @PostMapping(value="/get-user-details", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Account> getUserDetails(@RequestBody Map<String, String> json) {
+        try {
+            Integer userId = Integer.parseInt(json.get("userId"));
+            User user = repository.findById(userId);
+            return new ResponseEntity<Account>(user, HttpStatus.OK);
+        }
+        catch(NullPointerException e)
+        {
+                throw new AccountNotFoundException(json.get("id"));
+        }
+    }
     @GetMapping(value="/test")
     @ResponseBody
     public int test() {

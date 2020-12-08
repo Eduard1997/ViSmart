@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-1">
-                                <div class="card-profile-stats d-flex justify-content-center">
+                                <div class="card-profile-stats d-flex justify-content-center" style="width: 100%;">
                                     <div>
                                         <span class="heading">10</span>
                                         <span class="description">Homeworks done</span>
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         <div class="text-center mt-5">
-                            <h3>{{$route.params.firstName}} {{$route.params.lastName}}
+                            <h3>{{userDetails.first_name}} {{userDetails.last_name}}
                                 <span class="font-weight-light">, 27</span>
                             </h3>
                             <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>Iasi, Romania</div>
@@ -69,14 +69,26 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+    name: "profile",
+    data() {
+        return {
+            userDetails: {}
+        }
+    },
   methods: {
     viewClasses() {
-      this.$router.push({ name: 'classes', params: {loggedIn: true}});
+      this.$router.push({ name: 'classes', params: {loggedIn: true, role: this.userDetails.role, userId: this.userDetails.id}});
     }
   },
   created() {
-      this.$route.params.loggedIn = true;
+        let self = this;
+        this.$route.params.loggedIn = true;
+        axios.post('/api/get-user-details', {userId: this.$route.params.userId}).then(function(response) {
+            console.log(response.data);
+            self.userDetails = response.data;
+        });
     }
 };
 </script>

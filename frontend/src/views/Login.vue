@@ -68,7 +68,7 @@ export default {
       var self = this;
       axios.post("/api/user", {email: this.email, password: this.password}).then(function(response) {
         if(response.data.username) {
-          self.$router.push({ name: 'profile', params: {firstName: response.data.first_name, lastName: response.data.last_name, loggedIn: true}});
+          self.$router.push({ name: 'profile', params: {firstName: response.data.first_name, lastName: response.data.last_name, userId: response.data.id, loggedIn: true}});
         }
       })
     }

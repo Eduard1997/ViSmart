@@ -12,6 +12,7 @@ C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\ScreenShare.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\VideoStream.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\User.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\Participant.java
+C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\LiveStreamController.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\Classroom.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\ModuleCoordinator.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\ViRole.java
@@ -27,6 +28,8 @@ C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\Repository\UserInv
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\Subtitle.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\Member.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\WebRtcSignalingEndpoint.java
+C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\Repository\TeachersCoursesInventory.java
+C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\TeachersCourses.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\Message.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\UserNotFoundAdvice.java
 C:\Proiecte\ViSmart\backend\src\main\java\com\viSmart\viSmart\Chat.java
