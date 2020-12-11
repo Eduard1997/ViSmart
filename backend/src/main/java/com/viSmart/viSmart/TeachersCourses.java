@@ -4,11 +4,11 @@ import javax.persistence.*;
 
 @Entity
 public class TeachersCourses {
-    private @Id @GeneratedValue int id;
+    private @Id @GeneratedValue Long id;
     private int teacher_id;
     private int course_id;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 

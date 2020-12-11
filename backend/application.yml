@@ -10,6 +10,8 @@ spring:
     password:
 server:
   port : 8080
+management:
+  port : 3000
 
 Spring:
   vueURI: http://localhost:3000/
