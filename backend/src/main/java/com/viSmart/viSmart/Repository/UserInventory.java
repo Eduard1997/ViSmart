@@ -8,4 +8,5 @@ public interface UserInventory extends JpaRepository<User, Long>  {
     User findByEmail(String email);
     User findById(Integer userId);
     User findByUsername(String username);
+    boolean existsByEmailAndPassword(String email,String password);
 }

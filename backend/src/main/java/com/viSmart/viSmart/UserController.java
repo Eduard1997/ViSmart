@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
@@ -20,49 +21,21 @@ public class UserController {
 
     private final UserInventory repository;
 
-    private final UserService userServiceDetails;
-
-    public UserController(UserInventory repository, ApplicationContext context) {
+    public UserController(UserInventory repository) {
         this.repository = repository;
-        this.userServiceDetails = context.getBean(UserService.class);
     }
 
-    @PostMapping(value="/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<Account> getUser(@RequestBody Map<String, String> json) {
+    @GetMapping(value="/get-user-details", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Account> getUser() {
         try {
-            User user = repository.findByEmail(json.get("email"));
-            if (user.getPassword().equals(json.get("password"))) {
-                UserDetails userDTD = userServiceDetails.loadUserByUsername(user.getUsername());
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDTD, null, userDTD.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                return new ResponseEntity<Account>(user, HttpStatus.OK);
-            }
-        }
-        catch(NullPointerException e)
-        {
-            if (json.containsKey("email"))
-                throw new AccountNotFoundException(json.get("email"));
-        }
-        throw new AccountNotFoundException("nobody");
-    }
-
-    @PostMapping(value="/get-user-details", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public ResponseEntity<Account> getUserDetails(@RequestBody Map<String, String> json) {
-        try {
-            Integer userId = Integer.parseInt(json.get("userId"));
-            User user = repository.findById(userId);
+            Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = repository.findByEmail(principal.getName());
             return new ResponseEntity<Account>(user, HttpStatus.OK);
         }
         catch(NullPointerException e)
         {
-                throw new AccountNotFoundException(json.get("id"));
+            throw new AccountNotFoundException("nobody");
         }
     }
-    @GetMapping(value="/test")
-    @ResponseBody
-    public int test() {
-        return 1;
-    }
+
 }

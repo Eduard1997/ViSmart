@@ -31,7 +31,7 @@ public class WebRtcSignalingEndpoint {
         System.out.println("Open!");
         // Add websocket session to a global set to use in OnMessage.
         Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userInventory.findByUsername(principal.getName());
+        User user = userInventory.findByEmail(principal.getName());
         if (!videoConferences.containsKey(classname)) {
             VideoRest videoRest = new VideoRest(user);
             //get the info about the Vi Coordinator user?!
@@ -50,7 +50,7 @@ public class WebRtcSignalingEndpoint {
          * particular video conference.
          */
         Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userInventory.findByUsername(principal.getName());
+        User user = userInventory.findByEmail(principal.getName());
         if (videoConferences.containsKey(classname)) {
             VideoRest videoRest = videoConferences.get(classname);
             videoRest.setSettings(user,new Settings(),data);
@@ -61,7 +61,7 @@ public class WebRtcSignalingEndpoint {
     public void whenClosing(Session session,@PathParam("classname") String classname) {
         System.out.println("Close!");
         Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userInventory.findByUsername(principal.getName());
+        User user = userInventory.findByEmail(principal.getName());
         if (videoConferences.containsKey(classname)) {
             VideoRest videoRest = videoConferences.get(classname);
             if (videoRest.isViCoordinator(user))

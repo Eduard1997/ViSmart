@@ -1,55 +1,51 @@
 package com.viSmart.viSmart;
 
-import org.springframework.beans.factory.annotation.Value;
+
+import com.viSmart.viSmart.Repository.UserInventory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.lang.NonNull;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.util.matcher.AndRequestMatcher;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${management.port}")
-    private int managementPort;
+    private UserInventory userInventory;
+
+    public WebSecurityConfig(UserInventory userInventory){
+       this.userInventory = userInventory;
+    }
 
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.NEVER)
-                .and()
+                .cors()
+                .disable()
                 .authorizeRequests()
-                .antMatchers(String.valueOf(forPortAndPath(managementPort,"/")))
+                .antMatchers(HttpMethod.POST, "/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
-                .requestMatchers(forPortAndPath(managementPort,"/login"))
-                .permitAll()
-                .requestMatchers(forPortAndPath(managementPort,"/logout"))
-                .permitAll();
+                .and()
+                .addFilter(new UserAuthServiceFilter(authenticationManager()))
+                .addFilter(new UserServiceFilter(userInventory,authenticationManager()))
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
-    private RequestMatcher forPortAndPath(final int port, @NonNull final String pathPattern) {
-        return new AndRequestMatcher(forPort(port), new AntPathRequestMatcher(pathPattern));
-    }
-
-    private RequestMatcher forPort(final int port) {
-        return (HttpServletRequest request) -> { return port == request.getLocalPort(); };
-    }
-
-    @Bean
     @Override
-    public UserDetailsService userDetailsService() {
-        return new UserService();
+    @Bean(BeanIds.AUTHENTICATION_MANAGER)
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

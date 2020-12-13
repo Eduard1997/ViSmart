@@ -66,7 +66,7 @@ export default {
   methods: {
     login() {
       var self = this;
-      axios.post("/api/user", {email: this.email, password: this.password}).then(function(response) {
+      axios.get("/api/login", {params: {'email':this.email,'password':this.password},headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function(response) {
         if(response.data.username) {
           self.$router.push({ name: 'profile', params: {firstName: response.data.first_name, lastName: response.data.last_name, userId: response.data.id, loggedIn: true}});
         }
