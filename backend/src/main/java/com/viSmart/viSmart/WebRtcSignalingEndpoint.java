@@ -30,8 +30,8 @@ public class WebRtcSignalingEndpoint {
     public void whenOpening(Session session,@PathParam("classname") String classname) throws IOException, EncodeException {
         System.out.println("Open!");
         // Add websocket session to a global set to use in OnMessage.
-        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userInventory.findByEmail(principal.getName());
+        String username = (String)  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userInventory.findByEmail(username);
         if (!videoConferences.containsKey(classname)) {
             VideoRest videoRest = new VideoRest(user);
             //get the info about the Vi Coordinator user?!
@@ -49,8 +49,8 @@ public class WebRtcSignalingEndpoint {
          * real world, signal should be sent to only participant's who belong to
          * particular video conference.
          */
-        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userInventory.findByEmail(principal.getName());
+        String username = (String)  SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userInventory.findByEmail(username);
         if (videoConferences.containsKey(classname)) {
             VideoRest videoRest = videoConferences.get(classname);
             videoRest.setSettings(user,new Settings(),data);
@@ -60,8 +60,8 @@ public class WebRtcSignalingEndpoint {
     @OnClose
     public void whenClosing(Session session,@PathParam("classname") String classname) {
         System.out.println("Close!");
-        Principal principal = (Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userInventory.findByEmail(principal.getName());
+        String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userInventory.findByEmail(username);
         if (videoConferences.containsKey(classname)) {
             VideoRest videoRest = videoConferences.get(classname);
             if (videoRest.isViCoordinator(user))

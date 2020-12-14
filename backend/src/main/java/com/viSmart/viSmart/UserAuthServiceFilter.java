@@ -22,7 +22,7 @@ public class UserAuthServiceFilter extends BasicAuthenticationFilter {
 
     public static final String HEADER_STRING = "Authorization";
     public static final String SECRET = "SECRET_KEY";
-    public static final String TOKEN_PREFIX = "ViSmart";
+    public static final String TOKEN_PREFIX = "ViSmart ";
 
     public UserAuthServiceFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);

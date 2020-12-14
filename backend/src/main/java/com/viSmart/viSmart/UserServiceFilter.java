@@ -14,7 +14,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.core.userdetails.User;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
@@ -31,12 +31,9 @@ public class UserServiceFilter extends UsernamePasswordAuthenticationFilter {
     public static final long EXPIRATION_TIME = 900_000;
     public static final String SECRET = "SECRET_KEY";
 
-    private UserInventory userInventory;
-
-    public UserServiceFilter(UserInventory userInventory,AuthenticationManager authenticationManager ){
+    public UserServiceFilter(AuthenticationManager authenticationManager ){
         this.authenticationManager = authenticationManager;
         setFilterProcessesUrl("/login");
-        this.userInventory = userInventory;;
     }
 
     @Override
@@ -44,13 +41,11 @@ public class UserServiceFilter extends UsernamePasswordAuthenticationFilter {
                                                 HttpServletResponse res) throws AuthenticationException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        if (userInventory.existsByEmailAndPassword(email,password))
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                                 email,
                                 password,
                                 new ArrayList<>()));
-        else throw new AccountNotFoundException(email);
     }
 
     @Override
@@ -62,7 +57,6 @@ public class UserServiceFilter extends UsernamePasswordAuthenticationFilter {
                 .withSubject(((User) auth.getPrincipal()).getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SECRET.getBytes()));
-        User user = userInventory.findByUsername(((User) auth.getPrincipal()).getUsername());
 
         String body = "ViSmart " + token;
 
