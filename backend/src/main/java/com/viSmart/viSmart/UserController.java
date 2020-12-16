@@ -28,8 +28,8 @@ public class UserController {
     @GetMapping(value="/get-user-details", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Account> getUser() {
         try {
-            String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User user = repository.findByUsername(username);
+            String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = repository.findByEmail(email);
             return new ResponseEntity<Account>(user, HttpStatus.OK);
         }
         catch(NullPointerException e)

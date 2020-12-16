@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class Account {
 
 	protected @Id @GeneratedValue int id;
-	protected String username;
 	protected String password;
 	protected String email;
 	protected String picture_src;
@@ -19,10 +18,6 @@ public class Account {
 	public int getId() {
 		return this.id;
 	}
-	public String getUsername() {
-		return this.username;
-	}
-
 	public String getEmail() {
 		return this.email;
 	}
@@ -53,10 +48,6 @@ public class Account {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public void setPassword(String password) {

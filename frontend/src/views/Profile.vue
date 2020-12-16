@@ -31,7 +31,7 @@
                                                  v-if="userDetails.role == 1" @click="openCreateAccountModal()">Create
                                         account
                                     </base-button>
-                                    <base-button type="info" size="sm" class="mt-2 float-right mr-3">View classes
+                                    <base-button type="info" size="sm" class="float-right mr-3" @click="viewClasses()"> View classes
                                     </base-button>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
             <div class="form-group mt-3" v-if="role == 3">
                 <label>Select courses for teacher:</label>
                 <template v-for="courses in classes">
-                    <div class="row">
+                     <div class="row" :key="classes.name">
                         <div class="col-md-3">
                             <label>{{courses.name}}</label>
                         </div>
