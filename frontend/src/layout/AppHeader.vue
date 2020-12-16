@@ -2,7 +2,8 @@
     <header class="header-global">
         <base-nav class="navbar-main" transparent type="" effect="light" expand style="top: 30px;">
             <router-link slot="brand" class="navbar-brand mr-lg-5" to="/">
-                <img src="img/logos/default.png" alt="logo" style="position: absolute; left: 450px; bottom: -47px; height: 187px;">
+                <img src="img/logos/default.png" alt="logo"
+                     style="position: absolute; left: 450px; bottom: -47px; height: 187px;" class="logo-img">
             </router-link>
 
             <div class="row" slot="content-header" slot-scope="{closeMenu}">
@@ -88,48 +89,123 @@
                     </a>
                 </li>-->
                 <li class="nav-item d-none d-lg-block ml-lg-4">
-                  <base-button v-if="!isLogged" type="secondary" icon="ni ni-user-run" @click="goToLogin">Login</base-button>
-                  <base-button v-if="isLogged" type="secondary" icon="ni ni-user-run" @click="goToLogin">Logout</base-button>
+                    <base-button v-if="!isLogged && !landingPage && currentPage != '/login'" type="secondary" icon="ni ni-user-run" @click="goToLogin('login')">
+                        Login
+                    </base-button>
+                    <base-button v-if="isLogged && !landingPage && currentPage != '/login'" type="secondary" icon="ni ni-user-run" @click="goToLogin('logout')">
+                        Logout
+                    </base-button>
+                    <base-button v-if="isLogged && landingPage && currentPage != '/login'" type="secondary" icon="ni ni-user-run" @click="goToProfile()">
+                        Profile
+                    </base-button>
+                    <base-button v-if="isLogged && !landingPage && currentPage != '/login'" type="secondary" icon="fa fa-home" @click="goToHome()">
+                        Home
+                    </base-button>
                 </li>
             </ul>
         </base-nav>
     </header>
 </template>
 <script>
-import BaseNav from "@/components/BaseNav";
-import BaseDropdown from "@/components/BaseDropdown";
-import CloseButton from "@/components/CloseButton";
+    import BaseNav from "@/components/BaseNav";
+    import BaseDropdown from "@/components/BaseDropdown";
+    import CloseButton from "@/components/CloseButton";
 
-export default {
-  components: {
-    BaseNav,
-    CloseButton,
-    BaseDropdown
-  },
-  name: 'ApplicationHeader',
-  data() {
-    return {
-      isLogged: false,
-    }
-  },
-  methods: {
-    goToLogin() {
-      this.$router.push({ name: 'login' });
-    }
-  },
-  created() {
-    this.isLogged = false;
-  },
-  watch: {
-    '$route.params.loggedIn': function() {
-      if(this.$route.params.loggedIn == true) {
-        this.isLogged = true;
-      } else {
-        this.isLogged = false;
-      }
-    }
-  }
-};
+    export default {
+        components: {
+            BaseNav,
+            CloseButton,
+            BaseDropdown
+        },
+        name: 'ApplicationHeader',
+        data() {
+            return {
+                isLogged: false,
+                landingPage: false,
+                currentPage: ''
+            }
+        },
+        methods: {
+            goToLogin(parameter) {
+                if (parameter == 'logout') {
+                    localStorage.removeItem('vismart_jwt_token');
+                    localStorage.removeItem('user_details');
+                    localStorage.removeItem('remember');
+                    this.isLogged = false;
+                }
+                this.$router.push({name: 'login'});
+            },
+            goToProfile() {
+                this.$router.push({name: 'profile'});
+            },
+            goToHome() {
+                this.$router.push({name: 'components'});
+            }
+        },
+        created() {
+            this.isLogged = false;
+            this.currentPage = this.$route.path;
+            if (localStorage.getItem('vismart_jwt_token')) {
+                this.isLogged = true;
+            } else {
+                this.isLogged = false;
+            }
+            if(this.$route.path == '/' && localStorage.getItem("vismart_jwt_token") != null) {
+                this.landingPage = true;
+            } else {
+                this.landingPage = false;
+            }
+            if(this.$route.path == '/login') {
+                document.querySelector('.logo-img').classList.add('bottom-reduced');
+            } else {
+                document.querySelector('.logo-img').classList.remove('bottom-reduced');
+            }
+        },
+        mounted() {
+            this.currentPage = this.$route.path;
+            this.$root.$on('logged-in', (text) => { // here you need to use the arrow function
+                this.isLogged = true;
+            })
+            if(this.$route.path == '/' && localStorage.getItem("vismart_jwt_token")) {
+                this.landingPage = true;
+            } else {
+                this.landingPage = false;
+            }
+            if(this.$route.path == '/login') {
+                document.querySelector('.logo-img').classList.add('bottom-reduced');
+            } else {
+                document.querySelector('.logo-img').classList.remove('bottom-reduced');
+            }
+        },
+        watch: {
+            'isLogged': function () {
+                if (localStorage.getItem("vismart_jwt_token")) {
+                    this.isLogged = true;
+                } else {
+                    this.isLogged = false;
+                }
+            },
+            '$route.path': function() {
+                this.currentPage = this.$route.path;
+                if(this.$route.path == '/' && localStorage.getItem("vismart_jwt_token")) {
+                    this.landingPage = true;
+                } else {
+                    this.landingPage = false;
+                }
+                if(this.$route.path == '/login') {
+                    document.querySelector('.logo-img').classList.add('bottom-reduced');
+                } else {
+                    document.querySelector('.logo-img').classList.remove('bottom-reduced');
+                }
+            }
+        }
+    };
 </script>
 <style>
+    .bottom-reduced {
+        bottom: -70px !important;
+    }
+    .fa-home {
+        font-size: 18px !important;
+    }
 </style>

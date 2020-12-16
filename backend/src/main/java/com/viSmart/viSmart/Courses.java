@@ -8,14 +8,14 @@ import java.util.Date;
 @Entity
 public class Courses {
 
-    private @Id @GeneratedValue int id;
+    private @Id @GeneratedValue Long id;
     private String name;
     private Integer is_live;
     private String available_for_groups;
     private Date created_at;
     private Date updated_at;
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 

@@ -503,6 +503,8 @@
 <script>
 export default {
   name: "home",
-  components: {}
+  components: {},
+    methods: {
+    }
 };
 </script>

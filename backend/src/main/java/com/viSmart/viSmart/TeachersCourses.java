@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class TeachersCourses {
-    private @Id @GeneratedValue Long id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
     private int teacher_id;
     private int course_id;
 
@@ -18,5 +18,13 @@ public class TeachersCourses {
 
     public int getCourse_id() {
         return course_id;
+    }
+
+    public void setTeacher_id(int teacher_id) {
+        this.teacher_id = teacher_id;
+    }
+
+    public void setCourse_id(int course_id) {
+        this.course_id = course_id;
     }
 }

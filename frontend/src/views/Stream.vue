@@ -224,7 +224,7 @@
         },
         created() {
             var self = this;
-            axios.post('/api/check-stream-availability', {streamName: this.$route.query.stream}).then(function(response) {
+            axios.post('/api/check-stream-availability', {streamName: this.$route.query.stream}, {headers:{'Authorization':localStorage.getItem('vismart_jwt_token')}}).then(function(response) {
                 self.streamOnline = response.data == 0 ? false : true;
             })
         },

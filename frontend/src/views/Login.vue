@@ -20,10 +20,12 @@
 
                         <template>
                             <form role="form">
+                                <span class="error-text">Invalid username or password</span>
                                 <base-input alternative
-                                            class="mb-3"
+                                            class="mb-3 is-invalid"
                                             placeholder="Email"
                                             addon-left-icon="ni ni-email-83"
+
                                 v-model="email">
                                 </base-input>
                                 <base-input alternative
@@ -32,7 +34,7 @@
                                             addon-left-icon="ni ni-lock-circle-open"
                                 v-model="password">
                                 </base-input>
-                                <base-checkbox>
+                                <base-checkbox v-model="remember">
                                     Remember me
                                 </base-checkbox>
                                 <div class="text-center">
@@ -55,27 +57,44 @@
 </template>
 <script>
 import axios from 'axios';
+import $ from 'jquery';
+
 export default {
   name:"login",
   data() {
     return {
-      email: '',
-      password: ''
+        email: '',
+        password: '',
+        remember: false
     }
   },
   methods: {
     login() {
       var self = this;
       axios.get("/api/login", {params: {'email':this.email,'password':this.password},headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).then(function(response) {
-        if(response.data) {
+          if(response.data) {
+            localStorage.setItem('remember', self.remember === true);
+            localStorage.setItem('vismart_jwt_token', response.data);
           axios.get("/api/get-user-details",{headers:{'Authorization':response.data}}).then(function(response){
-          self.$router.push({ name: 'profile', params: {firstName: response.data.first_name, lastName: response.data.last_name, userId: response.data.id, loggedIn: true}});
+              localStorage.setItem('user_details', JSON.stringify(response.data));
+          self.$router.push({ name: 'profile'});
           });
         }
+      }).catch(function(error) {
+        $('.error-text').show();
+        $('input').addClass('error-input');
       })
     }
   }
 };
 </script>
 <style>
+    .error-input {
+        border: 2px solid red !important;
+        padding-left: 6px !important;
+    }
+    .error-text {
+        color: red;
+        display: none;
+    }
 </style>

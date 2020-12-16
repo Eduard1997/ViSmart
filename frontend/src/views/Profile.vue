@@ -25,8 +25,14 @@
                             </div>
                             <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
                                 <div class="card-profile-actions py-4 mt-lg-0">
-                                    <base-button type="info" size="sm" class="mr-4" @click="viewClasses">View classes</base-button>
-                                    <base-button type="default" size="sm" class="float-right">View Messages</base-button>
+                                    <base-button type="default" size="sm" class="float-right">View Messages
+                                    </base-button>
+                                    <base-button type="default" size="sm" class="float-left"
+                                                 v-if="userDetails.role == 1" @click="openCreateAccountModal()">Create
+                                        account
+                                    </base-button>
+                                    <base-button type="info" size="sm" class="mt-2 float-right mr-3">View classes
+                                    </base-button>
                                 </div>
                             </div>
                             <div class="col-lg-4 order-lg-1">
@@ -51,7 +57,8 @@
                                 <span class="font-weight-light">, 27</span>
                             </h3>
                             <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>Iasi, Romania</div>
-                            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>Distributed Systems Master</div>
+                            <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>Distributed Systems Master
+                            </div>
                             <div><i class="ni education_hat mr-2"></i>Faculty of Computer Science Iasi Romania</div>
                         </div>
                         <div class="mt-5 py-5 border-top text-center">
@@ -65,32 +72,117 @@
                 </card>
             </div>
         </section>
+        <modal :show.sync="showModal">
+            <template slot="header">
+                <h5 class="modal-title" id="exampleModalLabel">Create new account</h5>
+            </template>
+            <div>
+                <label for="email">First name:</label>
+                <input type="email" class="form-control" id="first_name" placeholder="First name" v-model="first_name">
+            </div>
+            <div>
+                <label for="email">Last name:</label>
+                <input type="email" class="form-control" id="last_name" placeholder="Last name" v-model="last_name">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" v-model="email">
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="text" class="form-control" id="password" placeholder="Email" v-model="password">
+            </div>
+            <div>
+                <label for="role">Role:</label>
+                <select id="role" class="form-control" v-model="role">
+                    <option value="1" selected>Admin</option>
+                    <option value="2">Student</option>
+                    <option value="3">Teacher</option>
+                </select>
+            </div>
+            <div v-if="role == 2">
+                <label for="group">Group:</label>
+                <input type="text" class="form-control" id="group" placeholder="Group" v-model="group">
+            </div>
+            <div class="form-group mt-3" v-if="role == 3">
+                <label>Select courses for teacher:</label>
+                <template v-for="courses in classes">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>{{courses.name}}</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox" style="height: 20px !important;" :value="courses.id" v-model="classes_arr">
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+            <template slot="footer">
+                <base-button type="secondary" @click="showModal = false">Cancel</base-button>
+                <base-button type="primary" @click="createAccount()">Create account</base-button>
+            </template>
+        </modal>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
-export default {
-    name: "profile",
-    data() {
-        return {
-            userDetails: {}
+    import axios from 'axios';
+    import Modal from "../components/Modal";
+
+    export default {
+        name: "profile",
+        components: {modal: Modal},
+        data() {
+            return {
+                userDetails: {},
+                showModal: false,
+                email: '',
+                password: '',
+                role: '',
+                group: '',
+                classes: [],
+                classes_arr: [],
+                last_name: '',
+                first_name: ''
+            }
+        },
+        methods: {
+            viewClasses() {
+                this.$router.push({name: 'classes'});
+            },
+            openCreateAccountModal() {
+                this.showModal = true;
+            },
+            createAccount() {
+                var self = this;
+                axios.post('/api/create-account', {
+                    email: this.email,
+                    password: this.password,
+                    role: this.role,
+                    group: this.group,
+                    classes: this.classes_arr.toString(),
+                    first_name: this.first_name,
+                    last_name: this.last_name
+                }, {headers: {'Authorization': localStorage.getItem('vismart_jwt_token')}}).then(function (response) {
+
+                });
+            },
+            getAllClasses() {
+                var self = this;
+                axios.get('/api/get-courses', {headers:{'Authorization':localStorage.getItem('vismart_jwt_token')}}).then(function(response) {
+                    self.classes = response.data;
+                })
+            }
+        },
+        created() {
+            this.$root.$emit('logged-in', 'logged-in');
+            this.userDetails = JSON.parse(localStorage.getItem('user_details'))
+            if(this.userDetails.role == 1) {
+                this.getAllClasses();
+            }
         }
-    },
-  methods: {
-    viewClasses() {
-      this.$router.push({ name: 'classes', params: {loggedIn: true, role: this.userDetails.role, userId: this.userDetails.id}});
-    }
-  },
-  created() {
-        let self = this;
-        this.$route.params.loggedIn = true;
-        axios.post('/api/get-user-details', {userId: this.$route.params.userId}).then(function(response) {
-            console.log(response.data);
-            self.userDetails = response.data;
-        });
-    }
-};
+    };
 </script>
 
 <style>

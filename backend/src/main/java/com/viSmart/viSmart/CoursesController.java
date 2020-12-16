@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @RestController
 public class CoursesController {
@@ -40,9 +38,25 @@ public class CoursesController {
     public ResponseEntity<Object> getTeacherCourses(@RequestBody Map<String, String> json) throws Exception {
         try {
             Integer teacherId = Integer.parseInt(json.get("userId"));
-            List<TeachersCourses> courses = teachersCoursesRepository.findAllById(teacherId);
+            /*List<TeachersCourses> courses = teachersCoursesRepository.findAllById(teacherId);
             List<Courses> responseCourses = coursesRepository.findAllById(
-                    courses.stream().map(TeachersCourses::getId).collect(Collectors.toSet()));
+                    courses.stream().map(TeachersCourses::getId).collect(Collectors.toSet()));*/
+            List<TeachersCourses> courses = teachersCoursesRepository.findAll();
+            ArrayList<Integer> coursesIds = new ArrayList<>();
+            for (TeachersCourses iterator:courses) {
+                if(iterator.getTeacher_id() == teacherId) {
+                    coursesIds.add(iterator.getCourse_id());
+                }
+            }
+            List<Courses> coursesList = coursesRepository.findAll();
+            List<Courses>responseCourses = new ArrayList<>();
+            for(int courseId: coursesIds) {
+                for (Courses course:coursesList) {
+                    if(course.getId() == courseId) {
+                        responseCourses.add(course);
+                    }
+                }
+            }
 
             return new ResponseEntity<Object>(responseCourses, HttpStatus.OK);
         }

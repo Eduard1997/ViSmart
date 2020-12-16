@@ -54,7 +54,7 @@
                 </thead>
                 <tbody>
                   <template v-for="myclass in classes">
-                    <tr>
+                    <tr :key="myclass.id">
                       <td>{{myclass.name}}</td>
                       <td>{{myclass.is_live == 1 ? 'Online' : 'Offline'}}</td>
                       <td>{{myclass.available_for_groups ? myclass.available_for_groups : '-'}}</td>
@@ -64,6 +64,9 @@
                         </button>
                         <button v-if="userDetails.role == 3" type="button" rel="tooltip" class="btn btn-primary btn-icon btn-sm btn-simple" @click="showStreamSettings(myclass.name)"  data-original-title="Stream Settings" title="Stream Settings">
                           <i class="fa fa-gears pt-1"></i>
+                        </button>
+                        <button v-if="userDetails.role == 3 && myclass.is_live == 1" type="button" rel="tooltip" class="btn btn-primary btn-icon btn-sm btn-simple" @click="stopStream(myclass.name)"  data-original-title="Stop Stream" title="Stop Stream">
+                          <i class="fa fa-window-close pt-1"></i>
                         </button>
                       </td>
                     </tr>
@@ -133,21 +136,22 @@ export default {
     goToStream(courseName) {
       let self = this;
       var groupFound = false;
-      this.classes.forEach(function(item, index) {
-        console.log(courseName);
-        console.log(item)
-        if(item.name == courseName) {
-          if(item.available_for_groups.indexOf(self.userDetails.study_group) !== -1) {
-            groupFound = true
+      if(this.userDetails.role != 3) {
+        this.classes.forEach(function(item, index) {
+          if(item.name == courseName) {
+            if(item.available_for_groups.indexOf(self.userDetails.study_group) !== -1) {
+              groupFound = true
+            }
           }
+        });
+        if(groupFound) {
+          this.$router.push({ name: 'stream', query: {stream: courseName}});
+        } else {
+          this.showErrorModal = true;
         }
-      });
-      if(groupFound) {
-        this.$router.push({ name: 'stream', query: {stream: courseName}, params: {loggedIn: true}});
       } else {
-        this.showErrorModal = true;
+        this.$router.push({ name: 'stream', query: {stream: courseName}});
       }
-
     },
     showStreamSettings(courseName) {
       this.courseName = courseName;
@@ -155,7 +159,7 @@ export default {
     },
     startStream() {
       var self = this;
-      axios.post('/api/start-stream', {courseName: this.courseName, groupsList: this.groupsList}).then(function(response) {
+      axios.post('/api/start-stream', {courseName: this.courseName, groupsList: this.groupsList}, {headers:{'Authorization':localStorage.getItem('vismart_jwt_token')}}).then(function(response) {
         if(response.data == 'success') {
           self.showModal = false;
           self.getTeacherData();
@@ -163,28 +167,32 @@ export default {
 
       });
     },
+    stopStream(courseName) {
+      var self = this;
+      axios.post('/api/stop-stream', {courseName: courseName}, {headers:{'Authorization':localStorage.getItem('vismart_jwt_token')}}).then(function(response) {
+        if(response.data == 'success') {
+          self.getTeacherData();
+        }
+      });
+    },
     getTeacherData() {
       var self = this;
-      axios.post('/api/get-teacher-courses', {userId: this.$route.params.userId}).then(function(response) {
+      axios.post('/api/get-teacher-courses', {userId: self.userDetails.id}, {headers:{'Authorization':localStorage.getItem('vismart_jwt_token')}}).then(function(response) {
         self.classes = response.data;
       })
     }
   },
   created() {
     var self = this;
-    this.$route.params.loggedIn = true;
-    var userRole = this.$route.params.role;
-
-    axios.post('/api/get-user-details', {userId: this.$route.params.userId}).then(function(response) {
-      self.userDetails = response.data;
-    });
+    this.userDetails = JSON.parse(localStorage.getItem('user_details'))
+    var userRole = this.userDetails.role;
 
     if(userRole === 2) {
-      axios.get('/api/get-courses').then(function(response) {
+      axios.get('/api/get-courses', {headers:{'Authorization':localStorage.getItem('vismart_jwt_token')}}).then(function(response) {
         self.classes = response.data;
       })
     } else if(userRole === 3){
-      axios.post('/api/get-teacher-courses', {userId: this.$route.params.userId}).then(function(response) {
+      axios.post('/api/get-teacher-courses', {userId: self.userDetails.id}, {headers:{'Authorization':localStorage.getItem('vismart_jwt_token')}}).then(function(response) {
         self.classes = response.data;
       })
     }
