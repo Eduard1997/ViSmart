@@ -184,9 +184,9 @@
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.0.4" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
     <orderEntry type="module-library">
-      <library name="Maven: com.sun:tools:11.0.7">
+      <library name="Maven: com.sun:tools:11.0.9">
         <CLASSES>
-          <root url="jar://$MAVEN_REPOSITORY$/com/sun/tools/11.0.7/tools-11.0.7.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/sun/tools/11.0.9/tools-11.0.9.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
