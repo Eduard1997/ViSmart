@@ -230,10 +230,12 @@
         },
         mounted() {
             let self = this;
+            var token = localStorage.getItem('vismart_jwt_token').split(" ")[1];
+            var streamName = this.$route.query.stream;
             console.log(window.location.host +
-                "/api/signal")
+                "/api/signal/"+streamName)
             self.signalingWebsocket = new WebSocket("ws://" + window.location.host +
-                "/api/signal");
+                "/api/signal/"+streamName+"/"+token);
             self.signalingWebsocket.onmessage = function(msg) {
                 console.log("Got message", msg.data);
                 var signal = JSON.parse(msg.data);

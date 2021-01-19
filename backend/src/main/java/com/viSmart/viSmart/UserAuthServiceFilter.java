@@ -63,4 +63,22 @@ public class UserAuthServiceFilter extends BasicAuthenticationFilter {
 
         return null;
     }
+
+    public UsernamePasswordAuthenticationToken getAuthentication(String token) {
+
+        if (token != null) {
+            String user = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
+                    .build()
+                    .verify(token.replace(TOKEN_PREFIX, ""))
+                    .getSubject();
+
+            if (user != null) {
+                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            }
+
+            return null;
+        }
+
+        return null;
+    }
 }
