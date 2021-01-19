@@ -110,6 +110,7 @@
     import BaseNav from "@/components/BaseNav";
     import BaseDropdown from "@/components/BaseDropdown";
     import CloseButton from "@/components/CloseButton";
+    import $ from "jquery";
 
     export default {
         components: {
@@ -156,9 +157,9 @@
                 this.landingPage = false;
             }
             if(this.$route.path == '/login') {
-                document.querySelector('.logo-img').classList.add('bottom-reduced');
+                $('.logo-img').addClass('bottom-reduced');
             } else {
-                document.querySelector('.logo-img').classList.remove('bottom-reduced');
+               $('.logo-img').removeClass('bottom-reduced');
             }
         },
         mounted() {
